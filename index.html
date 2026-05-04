@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>朱一江 · 爬虫学习之旅</title>
-    <!-- 引入 Font Awesome 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
@@ -40,7 +39,6 @@
         a:hover {
             color: #1d6fa5;
         }
-        /* 导航 */
         nav {
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
@@ -72,13 +70,11 @@
         .nav-links a:hover {
             color: var(--secondary);
         }
-        /* 容器 */
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
         }
-        /* 英雄区 */
         .hero {
             display: flex;
             flex-direction: column;
@@ -86,18 +82,14 @@
             text-align: center;
             padding: 3rem 0 2rem;
         }
-        .avatar {
-            width: 110px;
-            height: 110px;
+        .avatar-img {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #3498db, #9b59b6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
+            object-fit: cover;
+            border: 4px solid var(--secondary);
             box-shadow: 0 8px 20px rgba(52,152,219,0.3);
+            margin-bottom: 1.5rem;
         }
         .hero h1 {
             font-size: 2.2rem;
@@ -114,7 +106,6 @@
             color: var(--secondary);
             font-weight: 600;
         }
-        /* 分区标题 */
         .section-title {
             font-size: 1.7rem;
             font-weight: 700;
@@ -128,7 +119,6 @@
             color: var(--secondary);
             font-size: 1.5rem;
         }
-        /* 技能卡片网格 */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -156,7 +146,6 @@
             transform: translateY(-4px);
             box-shadow: var(--shadow-hover);
         }
-        /* 项目卡片 */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -200,7 +189,6 @@
             font-size: 0.8rem;
             font-weight: 500;
         }
-        /* 时间线 */
         .timeline {
             position: relative;
             padding-left: 2rem;
@@ -233,7 +221,6 @@
             color: var(--light-text);
             margin-bottom: 0.5rem;
         }
-        /* 关于我 */
         .about-text {
             background: var(--card-bg);
             border-radius: var(--radius);
@@ -254,7 +241,6 @@
             font-style: italic;
             color: #2c3e50;
         }
-        /* 页脚 */
         footer {
             text-align: center;
             padding: 2rem;
@@ -274,7 +260,6 @@
     </style>
 </head>
 <body>
-    <!-- 导航 -->
     <nav>
         <div class="logo">Zhu Yijiang</div>
         <ul class="nav-links">
@@ -286,18 +271,14 @@
     </nav>
 
     <div class="container">
-        <!-- 英雄区域 -->
         <section class="hero">
-            <div class="avatar">
-                <i class="fas fa-code"></i>
-            </div>
+            <img src="file:///D:/%E7%94%B5%E8%84%91%E5%9B%BE%E6%A0%87/10001.png" alt="头像" class="avatar-img">
             <h1>朱一江</h1>
             <p class="subtitle">
                 一名<span class="typed-text" id="typed"></span>的大一学生
             </p>
         </section>
 
-        <!-- 技能 -->
         <section id="skills">
             <h2 class="section-title"><i class="fas fa-tools"></i> 技术栈</h2>
             <div class="skills-grid">
@@ -314,7 +295,6 @@
             </div>
         </section>
 
-        <!-- 项目 -->
         <section id="projects">
             <h2 class="section-title"><i class="fas fa-folder-open"></i> 爬虫项目</h2>
             <div class="project-grid">
@@ -349,7 +329,6 @@
             </div>
         </section>
 
-        <!-- 学习历程 -->
         <section id="journey">
             <h2 class="section-title"><i class="fas fa-history"></i> 成长时间线</h2>
             <div class="timeline">
@@ -376,12 +355,11 @@
             </div>
         </section>
 
-        <!-- 关于我 -->
         <section id="about">
             <h2 class="section-title"><i class="fas fa-user"></i> 关于我</h2>
             <div class="about-text">
                 <p>我是<strong>朱一江</strong>，一名普通的大一学生，对计算机世界充满好奇。我并非天赋异禀，学习爬虫的路上也常常遇到挫折——比如一个403错误折腾了整整一天。但我相信<strong>“我哪有这么好”</strong>并不是自我否定，而是清醒地知道自己的位置，然后踏实地把每一行代码弄懂。</p>
-                <p>我喜欢用比喻理解抽象概念：把 HTML 比作便当盒，把 `class` 比作标签贴纸。这种思维方式让我在面对复杂的 Selenium 逻辑和反爬机制时，也能一步步拆解。</p>
+                <p>我喜欢用比喻理解抽象概念：把 HTML 比作便当盒，把 <code>class</code> 比作标签贴纸。这种思维方式让我在面对复杂的 Selenium 逻辑和反爬机制时，也能一步步拆解。</p>
                 <p>假期结束后，还要准备四级、计算机二级、物理高数以及各种短视频作业，但我不会放弃爬虫。我已经学会如何解决未知问题，这比记住某个库的语法更有价值。</p>
                 <div class="quote">
                     “The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.” — Albert Einstein
@@ -392,10 +370,9 @@
 
     <footer>
         <p>© 2026 朱一江 · 用代码探索世界</p>
-        <p style="margin-top:0.5rem;"><i class="fas fa-envelope"></i> example@email.com</p>
+        <p style="margin-top:0.5rem;"><i class="fas fa-envelope"></i> z_1235789@qq.com</p>
     </footer>
 
-    <!-- 打字效果 -->
     <script>
         (function() {
             const texts = ["热爱爬虫", "喜欢拆解问题", "坚持复盘", "偶尔疲惫但从未放弃"];
@@ -416,7 +393,6 @@
                 }
                 
                 if (!isDeleting && charIndex === currentText.length) {
-                    // 完成输入，停留1.5秒后开始删除
                     setTimeout(() => { isDeleting = true; }, 1500);
                 } else if (isDeleting && charIndex === 0) {
                     isDeleting = false;
