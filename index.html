@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>朱一江 · 爬虫学习之旅</title>
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #333;
+            --light-text: #6c757d;
+            --border: #e9ecef;
+            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-hover: 0 8px 24px rgba(0,0,0,0.1);
+            --radius: 12px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: #1d6fa5;
+        }
+        /* 导航 */
+        nav {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--light-text);
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        /* 容器 */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        /* 英雄区 */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 3rem 0 2rem;
+        }
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3498db, #9b59b6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 20px rgba(52,152,219,0.3);
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: var(--light-text);
+            max-width: 500px;
+        }
+        .typed-text {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        /* 分区标题 */
+        .section-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 2.5rem 0 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section-title i {
+            color: var(--secondary);
+            font-size: 1.5rem;
+        }
+        /* 技能卡片网格 */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .skill-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.2rem 0.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--primary);
+        }
+        .skill-card i {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 0.6rem;
+            color: var(--secondary);
+        }
+        .skill-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        /* 项目卡片 */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .project-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: 0.2s;
+            border-left: 4px solid var(--secondary);
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+        .project-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        .project-card p {
+            color: var(--light-text);
+            font-size: 0.9rem;
+            flex: 1;
+        }
+        .project-card .tech-tags {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+        .tech-tag {
+            background: #eef5fb;
+            color: var(--secondary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        /* 时间线 */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid var(--border);
+            margin: 1.5rem 0;
+        }
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 0.2rem;
+            width: 12px;
+            height: 12px;
+            background: var(--secondary);
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--secondary);
+        }
+        .timeline-item h4 {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        .timeline-item .date {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            margin-bottom: 0.5rem;
+        }
+        /* 关于我 */
+        .about-text {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.7;
+        }
+        .about-text strong {
+            color: var(--secondary);
+        }
+        .quote {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #f1f6fb;
+            border-left: 3px solid var(--secondary);
+            font-style: italic;
+            color: #2c3e50;
+        }
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--light-text);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航 -->
+    <nav>
+        <div class="logo">Zhu Yijiang</div>
+        <ul class="nav-links">
+            <li><a href="#skills">技能</a></li>
+            <li><a href="#projects">项目</a></li>
+            <li><a href="#journey">历程</a></li>
+            <li><a href="#about">关于我</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- 英雄区域 -->
+        <section class="hero">
+            <div class="avatar">
+                <i class="fas fa-code"></i>
+            </div>
+            <h1>朱一江</h1>
+            <p class="subtitle">
+                一名<span class="typed-text" id="typed"></span>的大一学生
+            </p>
+        </section>
+
+        <!-- 技能 -->
+        <section id="skills">
+            <h2 class="section-title"><i class="fas fa-tools"></i> 技术栈</h2>
+            <div class="skills-grid">
+                <div class="skill-card"><i class="fab fa-python"></i>Python</div>
+                <div class="skill-card"><i class="fas fa-spider"></i>Requests</div>
+                <div class="skill-card"><i class="fas fa-code-branch"></i>BeautifulSoup</div>
+                <div class="skill-card"><i class="fas fa-robot"></i>Selenium</div>
+                <div class="skill-card"><i class="fas fa-mouse-pointer"></i>XPath / CSS</div>
+                <div class="skill-card"><i class="fas fa-table"></i>CSV 存储</div>
+                <div class="skill-card"><i class="fas fa-shield-alt"></i>反爬对抗</div>
+                <div class="skill-card"><i class="fas fa-fingerprint"></i>TLS 指纹</div>
+                <div class="skill-card"><i class="fas fa-terminal"></i>FFmpeg</div>
+                <div class="skill-card"><i class="fas fa-search"></i>DevTools 侦察</div>
+            </div>
+        </section>
+
+        <!-- 项目 -->
+        <section id="projects">
+            <h2 class="section-title"><i class="fas fa-folder-open"></i> 爬虫项目</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>📚 Quotes 名言采集</h3>
+                    <p>独立完成的全站翻页爬虫，爬取 quotes.toscrape.com 全部10页名言，存储为CSV。练习了 requests、BeautifulSoup、CSS选择器和数据清洗。</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Requests</span>
+                        <span class="tech-tag">BeautifulSoup</span>
+                        <span class="tech-tag">CSV</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>📖 Dushu365 书籍清单</h3>
+                    <p>使用 Selenium 自动化筛选“非凡精读馆”“李蕾讲经典”等系列，处理动态加载和无限滚动，提取数百本书籍信息并保存为结构化数据。</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Selenium</span>
+                        <span class="tech-tag">XPath</span>
+                        <span class="tech-tag">滚动懒加载</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>🎵 音频下载尝试</h3>
+                    <p>深入反爬技术：通过 Network 侦察、curl_cffi 模拟TLS指纹、会话伪装，尝试批量下载受保护的音频流，虽遇403但仍积累了宝贵的对抗经验。</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">curl_cffi</span>
+                        <span class="tech-tag">TLS指纹</span>
+                        <span class="tech-tag">FFmpeg</span>
+                        <span class="tech-tag">m3u8</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 学习历程 -->
+        <section id="journey">
+            <h2 class="section-title"><i class="fas fa-history"></i> 成长时间线</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>🚀 静态爬虫入门</h4>
+                    <div class="date">2026年4月底</div>
+                    <p>从零开始学习 requests 和 BeautifulSoup，通过 Quotes 网站理解 HTTP 请求、解析 HTML 和 CSV 存储。</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>⚡ 动态网页与 Selenium</h4>
+                    <div class="date">2026年5月初</div>
+                    <p>挑战 dushu365 动态列表，学习 Selenium 操控浏览器、显式等待、XPath/CSS 定位，实现按系列和年份筛选并加载全部数据。</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>🛡️ 反爬虫与音频下载</h4>
+                    <div class="date">2026年5月初</div>
+                    <p>面对音频链接的403保护，尝试了 curl_cffi 模拟TLS指纹、Session cookie 传递等方法，虽未完全成功，但彻底理解了反爬机制。</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>🌱 反思与沉淀</h4>
+                    <div class="date">现在</div>
+                    <p>意识到基础需要巩固，主动规划回顾静态爬虫和Selenium核心代码，同时平衡学业与兴趣，用笔记和练习持续精进。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于我 -->
+        <section id="about">
+            <h2 class="section-title"><i class="fas fa-user"></i> 关于我</h2>
+            <div class="about-text">
+                <p>我是<strong>朱一江</strong>，一名普通的大一学生，对计算机世界充满好奇。我并非天赋异禀，学习爬虫的路上也常常遇到挫折——比如一个403错误折腾了整整一天。但我相信<strong>“我哪有这么好”</strong>并不是自我否定，而是清醒地知道自己的位置，然后踏实地把每一行代码弄懂。</p>
+                <p>我喜欢用比喻理解抽象概念：把 HTML 比作便当盒，把 `class` 比作标签贴纸。这种思维方式让我在面对复杂的 Selenium 逻辑和反爬机制时，也能一步步拆解。</p>
+                <p>假期结束后，还要准备四级、计算机二级、物理高数以及各种短视频作业，但我不会放弃爬虫。我已经学会如何解决未知问题，这比记住某个库的语法更有价值。</p>
+                <div class="quote">
+                    “The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.” — Albert Einstein
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2026 朱一江 · 用代码探索世界</p>
+        <p style="margin-top:0.5rem;"><i class="fas fa-envelope"></i> example@email.com</p>
+    </footer>
+
+    <!-- 打字效果 -->
+    <script>
+        (function() {
+            const texts = ["热爱爬虫", "喜欢拆解问题", "坚持复盘", "偶尔疲惫但从未放弃"];
+            let index = 0;
+            let charIndex = 0;
+            let currentText = '';
+            let isDeleting = false;
+            const typedElement = document.getElementById('typed');
+            
+            function type() {
+                currentText = texts[index];
+                if (isDeleting) {
+                    typedElement.textContent = currentText.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    typedElement.textContent = currentText.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+                
+                if (!isDeleting && charIndex === currentText.length) {
+                    // 完成输入，停留1.5秒后开始删除
+                    setTimeout(() => { isDeleting = true; }, 1500);
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    index = (index + 1) % texts.length;
+                }
+                
+                const speed = isDeleting ? 40 : 80;
+                setTimeout(type, speed);
+            }
+            
+            window.addEventListener('load', type);
+        })();
+    </script>
+</body>
+</html>
